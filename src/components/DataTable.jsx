@@ -8,7 +8,7 @@ const columns = [
     width: 150,
     renderCell: () => (
       <BsPersonCircle
-        style={{ width: '30px', height: '50px', borderRadius: '50%', color: '#FFFF' }}
+        style={{ width: '30px', height: '50px', borderRadius: '50%', color: '#063231' }}
       />
     ),
   },
