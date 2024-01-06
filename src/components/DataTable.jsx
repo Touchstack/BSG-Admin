@@ -1,20 +1,10 @@
 import { DataGrid } from '@mui/x-data-grid';
-import { BsPersonCircle } from 'react-icons/bs';
 
 const columns = [
-  {
-    field: 'image',
-    headerName: 'Image',
-    width: 150,
-    renderCell: () => (
-      <BsPersonCircle
-        style={{ width: '30px', height: '50px', borderRadius: '50%', color: '#063231' }}
-      />
-    ),
-  },
+ 
   {
     field: 'email',
-    headerName: 'Email',
+    headerName: 'Email address',
     width: 200,
   },
 ];
@@ -27,15 +17,14 @@ const rows = [
 
 const DataTable = () => {
   return (
-    <div style={{ height: 400, width: '50%' }}>
+     <div style={{ height: 400, width: '60%', backgroundColor:"#FFFFFF" }} >
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5}
-        checkboxSelection
         disableSelectionOnClick
       />
-    </div>
+   </div>
   );
 };
 

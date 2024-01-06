@@ -1,18 +1,27 @@
-import Logo from "../../assets/images/favicon.png";
+import NavBar from "../../components/NavBar";
 import DataTable from "../../components/DataTable";
-
 
 const HomePage = () => {
   return (
-    <div className="h-screen w-full bg-gradient-to-r from-[#FFF5DB] to-[#C7D9A7] pb-[7rem] flex flex-col items-center">
-        <div className="flex items-center justify-center ">
-          <img src={Logo} alt="Logo" className="md:w-[150px] sm:w-[100px] w-[100px]" />
-        </div>
+    <div className="bg-[#F1F2F2] h-screen">
+      <NavBar />
+      
+      {/* Text Area */}
+      <div className="flex flex-col mx-[6rem] md:mx-[13rem] lg:mx-[18rem] mb-5">
+        <h1 className="text-[1rem] md:text-[1.5rem] lg:text-[2.6rem] font-semibold">
+          40 Subscribers
+        </h1>
+        <p className="text-xs md:text-sm lg:text-base text-[#70787C]">
+          People that subscribed to the waitlist
+        </p>
+      </div>
 
+      {/* DataTable */}
+      <div className="flex items-center justify-center">
         <DataTable />
-
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
