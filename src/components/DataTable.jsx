@@ -5,10 +5,15 @@ import PropTypes from 'prop-types';
 
 const columns = [
   {
+    field: 'id',
+    headerName: 'User ID',
+    width: 300,
+  },
+  {
     field: 'email',
     headerName: 'Email address',
     width: 300,
-  },
+  }
 ];
 
 const DataTable = ({ onUsersLengthChange }) => {
@@ -18,7 +23,7 @@ const DataTable = ({ onUsersLengthChange }) => {
     const fetchData = () => {
       getUsers()
         .then((res) => {
-          const usersData = res.data.data.map((user, index) => ({ id: index + 1, email: user.email }));
+          const usersData = res.data.data.map((user) => ({ id: user._id, email: user.email }));
           setRows(usersData);
           onUsersLengthChange(usersData.length);
         })
@@ -31,11 +36,11 @@ const DataTable = ({ onUsersLengthChange }) => {
   }, [onUsersLengthChange]);
 
   return (
-    <div style={{ height: 400, width: '60%', backgroundColor: "#FFFFFF" }}>
+    <div style={{ height: 450, width: '60%', backgroundColor: "#FFFFFF" }}>
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         disableSelectionOnClick
       />
     </div>
