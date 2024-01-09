@@ -1,31 +1,49 @@
 import { DataGrid } from '@mui/x-data-grid';
+import { useEffect, useState } from 'react';
+import { getUsers } from '../../services/ListUsersService';
+import PropTypes from 'prop-types';
 
 const columns = [
- 
   {
     field: 'email',
     headerName: 'Email address',
-    width: 200,
+    width: 300,
   },
 ];
 
-const rows = [
-  {id: 1, email: 'user1@example.com' },
-  {id: 2, email: 'user2@example.com' },
-  // Add more rows as needed
-];
+const DataTable = ({ onUsersLengthChange }) => {
+  const [rows, setRows] = useState([]);
 
-const DataTable = () => {
+  useEffect(() => {
+    const fetchData = () => {
+      getUsers()
+        .then((res) => {
+          const usersData = res.data.data.map((user, index) => ({ id: index + 1, email: user.email }));
+          setRows(usersData);
+          onUsersLengthChange(usersData.length);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    };
+  
+    fetchData();
+  }, [onUsersLengthChange]);
+
   return (
-     <div style={{ height: 400, width: '60%', backgroundColor:"#FFFFFF" }} >
+    <div style={{ height: 400, width: '60%', backgroundColor: "#FFFFFF" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5}
         disableSelectionOnClick
       />
-   </div>
+    </div>
   );
+};
+
+DataTable.propTypes = {
+  onUsersLengthChange: PropTypes.func.isRequired,
 };
 
 export default DataTable;
