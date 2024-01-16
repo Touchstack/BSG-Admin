@@ -11,7 +11,7 @@ const columns = [
     width: 300,
   },
   {
-    field: "id",
+    field: "timestamp",
     headerName: "Subscribed at",
     width: 300,
   },
@@ -21,12 +21,15 @@ const DataTable = ({ onUsersLengthChange }) => {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    const fetchData = () => {
-      getUsers()
+    const fetchData = async () => {
+      await getUsers()
         .then((res) => {
           const usersData = res.data.data.map((user) => ({
-            id: moment(user.timestamp).format("dddd, Do MMMM YYYY (h:mm A)"),
+            id: user._id,
             email: user.email,
+            timestamp: moment(user.timestamp).format(
+              "dddd, Do MMMM YYYY (h:mm A)"
+            ),
           }));
           setRows(usersData);
           onUsersLengthChange(usersData.length);
